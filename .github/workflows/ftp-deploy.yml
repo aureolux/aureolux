@@ -27,6 +27,6 @@ jobs:
             set ftp:ssl-allow true;                 # usa FTPS explícito
             open -u $FTP_USER,$FTP_PASS $FTP_HOST;
             mirror -R --delete --verbose \
-              ./wp-content/themes/ledstore \        # carpeta local
-              /html/wp-content/themes/ledstore      # carpeta en Arsys
+              ./wp-content/themes/aureolux\        # carpeta local
+              /html/wp-content/themes/aureolux      # carpeta en Arsys
           "

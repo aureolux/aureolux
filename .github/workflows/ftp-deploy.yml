@@ -1,22 +1,18 @@
-name: Deploy theme to Arsys
+name: Deploy Aureolux theme to Arsys
 
 on:
   push:
-    branches: [ main ]          # se ejecuta al hacer push a main
+    branches: [ main ]
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-
     steps:
-      # 1) Clona tu repo
       - uses: actions/checkout@v4
 
-      # 2) Instala lftp (cliente FTPS)
       - name: Install lftp
         run: sudo apt-get update -y && sudo apt-get -y install lftp
 
-      # 3) Sube el tema 'aureolux'
       - name: Upload via FTPS
         env:
           FTP_HOST: ${{ secrets.FTP_HOST }}

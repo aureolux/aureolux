@@ -2,21 +2,21 @@ name: Deploy theme to Arsys
 
 on:
   push:
-    branches: [ main ]          # solo cuando subas a main
+    branches: [ main ]          # se ejecuta al hacer push a main
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-      # 1) Baja tu código
+      # 1) Clona tu repo
       - uses: actions/checkout@v4
 
       # 2) Instala lftp (cliente FTPS)
       - name: Install lftp
-        run: sudo apt-get update && sudo apt-get -y install lftp
+        run: sudo apt-get update -y && sudo apt-get -y install lftp
 
-      # 3) Sincroniza la carpeta del tema
+      # 3) Sube el tema 'aureolux'
       - name: Upload via FTPS
         env:
           FTP_HOST: ${{ secrets.FTP_HOST }}
@@ -24,9 +24,10 @@ jobs:
           FTP_PASS: ${{ secrets.FTP_PASS }}
         run: |
           lftp -c "
-            set ftp:ssl-allow true;                 # usa FTPS explícito
+            set ftp:ssl-allow true;
             open -u $FTP_USER,$FTP_PASS $FTP_HOST;
             mirror -R --delete --verbose \
-              ./wp-content/themes/aureolux \        # carpeta local
-              /html/wp-content/themes/aureolux      # carpeta en Arsys
+              ./wp-content/themes/aureolux \
+              /html/wp-content/themes/aureolux
           "
+

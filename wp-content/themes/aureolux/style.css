@@ -790,10 +790,11 @@ p {
 /* ================ Sistema Escalonado de Reservas ================ */
 .tier-system {
   margin: 1.5rem 0;
-  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
   border-radius: 20px;
   padding: 2rem;
-  box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .tier-header {
@@ -803,13 +804,14 @@ p {
 
 .tier-header h3 {
   font-size: 1.4rem;
-  color: var(--text-color);
+  color: #ffffff;
   margin-bottom: 0.5rem;
   font-weight: 700;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .tier-explanation {
-  color: var(--text-light);
+  color: rgba(255, 255, 255, 0.8);
   font-size: 0.95rem;
   margin: 0;
   font-weight: 500;
@@ -824,62 +826,90 @@ p {
 
 .tier-card {
   background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
-  border: 2px solid #dee2e6;
-  border-radius: 12px;
+  border: 3px solid transparent;
+  border-radius: 16px;
   padding: 1.5rem;
   text-align: center;
   position: relative;
   transition: all 0.3s ease;
-  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
   min-height: 200px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  overflow: hidden;
+}
+
+.tier-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 100%);
+  pointer-events: none;
+  border-radius: 16px;
 }
 
 .tier-card.active {
-  border-color: var(--primary-color);
-  background: linear-gradient(135deg, rgba(var(--primary-rgb), 0.05), rgba(var(--secondary-rgb), 0.05));
+  border-color: #ffd700;
+  background: linear-gradient(135deg, #fff9e6 0%, #ffeaa7 100%);
   transform: scale(1.05);
-  box-shadow: 0 10px 30px rgba(var(--primary-rgb), 0.2);
+  box-shadow: 0 8px 32px rgba(255, 215, 0, 0.4);
+  animation: activeGlow 2s ease-in-out infinite alternate;
+}
+
+@keyframes activeGlow {
+  0% { box-shadow: 0 8px 32px rgba(255, 215, 0, 0.4); }
+  100% { box-shadow: 0 12px 40px rgba(255, 215, 0, 0.6); }
 }
 
 .tier-card.completed {
-  border-color: var(--success-color);
-  background: rgba(40, 167, 69, 0.05);
-  opacity: 0.8;
+  border-color: #00b894;
+  background: linear-gradient(135deg, #e8f5f0 0%, #b2dfdb 100%);
+  opacity: 0.9;
 }
 
 .tier-card.upcoming {
-  opacity: 0.6;
-  border-color: #dee2e6;
+  opacity: 0.7;
+  border-color: #6c757d;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
 }
 
 .tier-badge {
   position: absolute;
-  top: -10px;
+  top: -12px;
   left: 50%;
   transform: translateX(-50%);
-  padding: 0.5rem 1rem;
-  border-radius: 20px;
-  font-size: 0.8rem;
-  font-weight: 700;
+  padding: 0.6rem 1.2rem;
+  border-radius: 25px;
+  font-size: 0.75rem;
+  font-weight: 800;
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 1.5px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  border: 2px solid rgba(255, 255, 255, 0.3);
 }
 
 .tier-card.active .tier-badge {
-  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  background: linear-gradient(135deg, #ff6b6b, #ee5a24);
   color: white;
+  animation: badgePulse 1.5s ease-in-out infinite;
+}
+
+@keyframes badgePulse {
+  0%, 100% { transform: translateX(-50%) scale(1); }
+  50% { transform: translateX(-50%) scale(1.05); }
 }
 
 .tier-card.completed .tier-badge {
-  background: var(--success-color);
+  background: linear-gradient(135deg, #00b894, #00a085);
   color: white;
 }
 
 .tier-card.upcoming .tier-badge {
-  background: #6c757d;
+  background: linear-gradient(135deg, #636e72, #2d3436);
   color: white;
 }
 
@@ -941,15 +971,16 @@ p {
 }
 
 .current-offer {
-  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-  border-radius: 16px;
-  padding: 1.5rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 20px;
+  padding: 2rem;
   color: white;
   text-align: center;
-  margin: 1rem 0;
-  box-shadow: 0 8px 25px rgba(var(--primary-rgb), 0.3);
+  margin: 1.5rem 0;
+  box-shadow: 0 12px 40px rgba(102, 126, 234, 0.4);
   position: relative;
   overflow: hidden;
+  border: 2px solid rgba(255, 255, 255, 0.2);
 }
 
 .current-offer::before {
@@ -959,8 +990,25 @@ p {
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(45deg, rgba(255,255,255,0.1) 0%, transparent 100%);
+  background: linear-gradient(45deg, rgba(255,255,255,0.15) 0%, transparent 50%, rgba(255,255,255,0.05) 100%);
   pointer-events: none;
+}
+
+.current-offer::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: conic-gradient(from 0deg, transparent, rgba(255,255,255,0.1), transparent);
+  animation: rotate 4s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes rotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
 .offer-content {

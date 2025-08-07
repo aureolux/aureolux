@@ -787,6 +787,235 @@ p {
   }
 }
 
+/* ================ Sistema Escalonado de Reservas ================ */
+.tier-system {
+  margin: 2rem 0;
+}
+
+.tier-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.tier-header h3 {
+  font-size: 1.5rem;
+  color: var(--text-color);
+  margin-bottom: 0.5rem;
+}
+
+.tier-explanation {
+  color: var(--text-light);
+  font-size: 1rem;
+  margin: 0;
+}
+
+.tiers-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.tier-card {
+  background: white;
+  border: 3px solid #e9ecef;
+  border-radius: 16px;
+  padding: 2rem;
+  text-align: center;
+  position: relative;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.tier-card.active {
+  border-color: var(--primary-color);
+  background: linear-gradient(135deg, rgba(var(--primary-rgb), 0.05), rgba(var(--secondary-rgb), 0.05));
+  transform: scale(1.05);
+  box-shadow: 0 10px 30px rgba(var(--primary-rgb), 0.2);
+}
+
+.tier-card.completed {
+  border-color: var(--success-color);
+  background: rgba(40, 167, 69, 0.05);
+  opacity: 0.8;
+}
+
+.tier-card.upcoming {
+  opacity: 0.6;
+  border-color: #dee2e6;
+}
+
+.tier-badge {
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.tier-card.active .tier-badge {
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  color: white;
+}
+
+.tier-card.completed .tier-badge {
+  background: var(--success-color);
+  color: white;
+}
+
+.tier-card.upcoming .tier-badge {
+  background: #6c757d;
+  color: white;
+}
+
+.tier-card h4 {
+  font-size: 1.1rem;
+  color: var(--text-color);
+  margin: 1.5rem 0 1rem 0;
+  font-weight: 600;
+}
+
+.tier-price {
+  margin: 1.5rem 0;
+}
+
+.tier-price .price {
+  display: block;
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--primary-color);
+  line-height: 1;
+  margin-bottom: 0.5rem;
+}
+
+.tier-price .savings {
+  display: block;
+  font-size: 0.9rem;
+  color: var(--success-color);
+  font-weight: 600;
+}
+
+.tier-progress {
+  margin-top: 1.5rem;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 8px;
+  background: #e9ecef;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 0.5rem;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+  border-radius: 4px;
+  transition: width 0.3s ease;
+}
+
+.tier-card.completed .progress-fill {
+  background: var(--success-color);
+}
+
+.progress-text {
+  font-size: 0.85rem;
+  color: var(--text-light);
+  font-weight: 600;
+}
+
+.current-offer {
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  border-radius: 20px;
+  padding: 2rem;
+  color: white;
+  text-align: center;
+  margin: 2rem 0;
+  box-shadow: 0 15px 40px rgba(var(--primary-rgb), 0.3);
+}
+
+.offer-content h3 {
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+  font-weight: 700;
+}
+
+.current-price {
+  margin: 1.5rem 0;
+}
+
+.big-price {
+  display: block;
+  font-size: 3.5rem;
+  font-weight: 900;
+  line-height: 1;
+  margin-bottom: 0.5rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.deposit-info {
+  display: block;
+  font-size: 1.1rem;
+  opacity: 0.9;
+  font-weight: 500;
+}
+
+.urgency-message {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: rgba(255, 255, 255, 0.15);
+  padding: 1rem;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.urgency-icon {
+  font-size: 1.2rem;
+  animation: pulse 1.5s infinite;
+}
+
+.reserve-action {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.reserve-btn {
+  font-size: 1.2rem;
+  padding: 1.2rem 2rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 8px 25px rgba(var(--primary-rgb), 0.3);
+  transition: all 0.3s ease;
+}
+
+.reserve-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 35px rgba(var(--primary-rgb), 0.4);
+}
+
+.guarantee-badges {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.5rem;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.guarantee-item {
+  font-size: 0.9rem;
+  color: var(--text-light);
+  font-weight: 500;
+  padding: 0.5rem;
+}
+
 /* ================ Footer ================ */
 .site-footer {
   background: var(--bg-dark);
@@ -1128,9 +1357,22 @@ p {
 
 /* Responsive para checkout */
 @media (max-width: 768px) {
-  .checkout-form-wrapper {
+  .checkout-form-wrap  .preorder-form {
     grid-template-columns: 1fr;
-    gap: 1.5rem;
+    gap: 1rem;
+  }
+  
+  .tiers-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1rem;
+  }
+  
+  .tier-card {
+    padding: 1.5rem;
+  }
+  
+  .current-offer {
+    margin-top: 2rem;
   }
   
   .product-info {
@@ -1381,6 +1623,42 @@ p {
   
   .cart-header h2 {
     font-size: 1.5rem;
+  }
+  
+  .countdown-timer {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  /* Sistema Escalonado Responsive */
+  .tiers-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .tier-card {
+    padding: 1.5rem;
+  }
+  
+  .tier-card.active {
+    transform: none;
+  }
+  
+  .tier-price .price {
+    font-size: 2rem;
+  }
+  
+  .big-price {
+    font-size: 2.5rem;
+  }
+  
+  .current-offer {
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+  }
+  
+  .guarantee-badges {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
   }
 }
 

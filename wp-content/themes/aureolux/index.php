@@ -260,56 +260,138 @@ get_header(); ?>
 <section id="preorder" class="preorder-section">
   <div class="container">
     <div class="preorder-box">
-      <h2>Reserva tu máscara AUREOLUX</h2>
-      <p class="preorder-subtitle">Oferta especial pre-lanzamiento - Ahorra <?php echo $tier_info ? $tier_info['savings'] : 80; ?>€</p>
+      <h2>🔥 Preventa Escalonada - ¡Aprovecha Ahora!</h2>
+      <p class="preorder-subtitle">Precio aumenta con cada tramo vendido - <?php echo $tier_info ? $tier_info['message'] : 'Solo quedan 50 unidades a este precio'; ?></p>
       
-      <div class="countdown-timer">
-        <div class="timer-block">
-          <span id="hours">23</span>
-          <label>Horas</label>
+      <!-- Sistema Escalonado Visual -->
+      <div class="tier-system">
+        <div class="tier-header">
+          <h3>Sistema de Precios por Tramos</h3>
+          <p class="tier-explanation">El precio aumenta automáticamente cada 50-100 unidades vendidas</p>
         </div>
-        <div class="timer-block">
-          <span id="minutes">45</span>
-          <label>Minutos</label>
+        
+        <div class="tiers-grid">
+          <?php 
+          $current_tier = $tier_info ? $tier_info['tier'] : 1;
+          $total_sold = 0;
+          if (function_exists('aureolux_get_product_id')) {
+            $product_id = aureolux_get_product_id();
+            if ($product_id) {
+              $tier1_sold = get_post_meta($product_id, '_aureolux_tier1_sold', true) ?: 0;
+              $tier2_sold = get_post_meta($product_id, '_aureolux_tier2_sold', true) ?: 0;
+              $tier3_sold = get_post_meta($product_id, '_aureolux_tier3_sold', true) ?: 0;
+              $total_sold = $tier1_sold + $tier2_sold + $tier3_sold;
+            }
+          }
+          ?>
+          
+          <!-- Tier 1 -->
+          <div class="tier-card <?php echo $current_tier == 1 ? 'active' : ($total_sold >= 50 ? 'completed' : 'upcoming'); ?>">
+            <div class="tier-badge">
+              <?php if ($current_tier == 1): ?>
+                🔥 ACTIVO
+              <?php elseif ($total_sold >= 50): ?>
+                ✅ AGOTADO
+              <?php else: ?>
+                ⏳ PRÓXIMO
+              <?php endif; ?>
+            </div>
+            <h4>Primeras 50 unidades</h4>
+            <div class="tier-price">
+              <span class="price">69€</span>
+              <span class="savings">Ahorras 80€</span>
+            </div>
+            <div class="tier-progress">
+              <div class="progress-bar">
+                <div class="progress-fill" style="width: <?php echo min(100, ($total_sold / 50) * 100); ?>%"></div>
+              </div>
+              <span class="progress-text"><?php echo min(50, $total_sold); ?>/50 vendidas</span>
+            </div>
+          </div>
+          
+          <!-- Tier 2 -->
+          <div class="tier-card <?php echo $current_tier == 2 ? 'active' : ($total_sold >= 150 ? 'completed' : 'upcoming'); ?>">
+            <div class="tier-badge">
+              <?php if ($current_tier == 2): ?>
+                🔥 ACTIVO
+              <?php elseif ($total_sold >= 150): ?>
+                ✅ AGOTADO
+              <?php else: ?>
+                ⏳ PRÓXIMO
+              <?php endif; ?>
+            </div>
+            <h4>Siguientes 100 unidades</h4>
+            <div class="tier-price">
+              <span class="price">99€</span>
+              <span class="savings">Ahorras 50€</span>
+            </div>
+            <div class="tier-progress">
+              <div class="progress-bar">
+                <div class="progress-fill" style="width: <?php echo $total_sold > 50 ? min(100, (($total_sold - 50) / 100) * 100) : 0; ?>%"></div>
+              </div>
+              <span class="progress-text"><?php echo max(0, min(100, $total_sold - 50)); ?>/100 vendidas</span>
+            </div>
+          </div>
+          
+          <!-- Tier 3 -->
+          <div class="tier-card <?php echo $current_tier == 3 ? 'active' : ($total_sold >= 250 ? 'completed' : 'upcoming'); ?>">
+            <div class="tier-badge">
+              <?php if ($current_tier == 3): ?>
+                🔥 ACTIVO
+              <?php elseif ($total_sold >= 250): ?>
+                ✅ AGOTADO
+              <?php else: ?>
+                ⏳ PRÓXIMO
+              <?php endif; ?>
+            </div>
+            <h4>Últimas 100 unidades</h4>
+            <div class="tier-price">
+              <span class="price">129€</span>
+              <span class="savings">Ahorras 20€</span>
+            </div>
+            <div class="tier-progress">
+              <div class="progress-bar">
+                <div class="progress-fill" style="width: <?php echo $total_sold > 150 ? min(100, (($total_sold - 150) / 100) * 100) : 0; ?>%"></div>
+              </div>
+              <span class="progress-text"><?php echo max(0, min(100, $total_sold - 150)); ?>/100 vendidas</span>
+            </div>
+          </div>
         </div>
-        <div class="timer-block">
-          <span id="seconds">32</span>
-          <label>Segundos</label>
+        
+        <!-- Precio Actual Destacado -->
+        <div class="current-offer">
+          <div class="offer-content">
+            <h3>💰 Precio Actual</h3>
+            <div class="current-price">
+              <span class="big-price"><?php echo $tier_info ? $tier_info['price'] : 69; ?>€</span>
+              <span class="deposit-info">Solo 29€ de depósito hoy</span>
+            </div>
+            <div class="urgency-message">
+              <span class="urgency-icon">⚡</span>
+              <span><?php echo $tier_info ? $tier_info['message'] : 'Solo quedan 50 unidades a este precio'; ?></span>
+            </div>
+          </div>
         </div>
       </div>
 
-      <form class="preorder-form" onsubmit="handlePreorder(event)">
-        <div class="form-group">
-          <input type="text" placeholder="Nombre completo" required>
-        </div>
-        <div class="form-group">
-          <input type="email" placeholder="Email" required>
-        </div>
-        <div class="form-group">
-          <input type="tel" placeholder="Teléfono" required>
-        </div>
-        <button type="submit" class="btn-primary btn-large btn-full">
-          Reservar Ahora por <?php echo $tier_info ? $tier_info['price'] : 69; ?>€
-          <span class="btn-subtitle">Depósito 29€ - Ahorra <?php echo $tier_info ? $tier_info['savings'] : 80; ?>€</span>
+      <!-- Botón de Reserva Directo -->
+      <div class="reserve-action">
+        <button onclick="addToCartAjax()" class="btn-primary btn-large btn-full reserve-btn">
+          🛒 Reservar Ahora por <?php echo $tier_info ? $tier_info['price'] : 69; ?>€
+          <span class="btn-subtitle">Depósito 29€ - Resto al envío</span>
         </button>
-        <p class="form-note">
-          <span>🔒 Pago 100% seguro</span>
-          <span>📦 Envío en 24-48h</span>
-          <span>✅ Garantía 30 días</span>
-        </p>
-      </form>
+        
+        <div class="guarantee-badges">
+          <span class="guarantee-item">🔒 Pago 100% seguro</span>
+          <span class="guarantee-item">🚚 Envío GRATIS</span>
+          <span class="guarantee-item">↩️ 30 días garantía</span>
+          <span class="guarantee-item">✅ Certificado FDA</span>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- Popup urgencia (aparece tras 30 segundos) -->
-<div id="urgency-popup" class="popup hidden">
-  <div class="popup-content">
-    <button class="popup-close" onclick="closePopup()">×</button>
-    <h3>⚡ ¡Espera! Oferta exclusiva</h3>
-    <p>Solo para ti: 10€ extra de descuento si reservas en los próximos 5 minutos</p>
-    <button class="btn-primary" onclick="applyExtraDiscount()">Aplicar Descuento</button>
-  </div>
-</div>
+
 
 <?php get_footer(); ?>

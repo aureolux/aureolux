@@ -1,0 +1,22 @@
+# --- 1) Ignorar dependencias y build tools ---
+docs/
+wp-content/themes/aureolux/node_modules/
+wp-content/themes/aureolux/package.json
+wp-content/themes/aureolux/package-lock.json
+wp-content/themes/aureolux/vite.config.js
+
+# --- 2) Carpeta de código fuente (no necesaria en prod) ---
+wp-content/themes/aureolux/src/
+
+# --- 3) Otros archivos de trabajo / duplicados ---
+wp-content/themes/aureolux/aureolux-styles.css
+
+# --- 4) Cosas comunes que no conviene subir ---
+# Sistemas
+.DS_Store
+Thumbs.db
+README.md
+# Logs y cachés
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*

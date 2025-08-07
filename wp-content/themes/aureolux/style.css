@@ -966,7 +966,7 @@ p {
 
 .progress-text {
   font-size: 0.85rem;
-  color: var(--text-light);
+  color: #000000;
   font-weight: 600;
 }
 
@@ -1065,6 +1065,49 @@ p {
 .urgency-icon {
   font-size: 1.2rem;
   animation: pulse 1.5s infinite;
+}
+
+/* CTA Integrado en el bloque lavanda */
+.integrated-cta {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.reserve-btn-integrated {
+  width: 100%;
+  background: linear-gradient(135deg, #ffd700, #ffb347);
+  color: #1a1a2e;
+  border: none;
+  padding: 1.2rem 2rem;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  box-shadow: 0 6px 20px rgba(255, 215, 0, 0.4);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  position: relative;
+  z-index: 2;
+}
+
+.reserve-btn-integrated:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(255, 215, 0, 0.6);
+  background: linear-gradient(135deg, #ffed4e, #ffc947);
+}
+
+.btn-subtitle-integrated {
+  font-size: 0.85rem;
+  font-weight: 600;
+  opacity: 0.8;
+  text-transform: none;
+  letter-spacing: 0.5px;
 }
 
 .reserve-action {

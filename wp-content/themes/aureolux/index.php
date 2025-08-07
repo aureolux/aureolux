@@ -358,7 +358,7 @@ get_header(); ?>
           </div>
         </div>
         
-        <!-- Precio Actual Destacado -->
+        <!-- Precio Actual Destacado con CTA Integrado -->
         <div class="current-offer">
           <div class="offer-content">
             <h3>💰 Precio Actual</h3>
@@ -370,22 +370,15 @@ get_header(); ?>
               <span class="urgency-icon">⚡</span>
               <span><?php echo $tier_info ? $tier_info['message'] : 'Solo quedan 50 unidades a este precio'; ?></span>
             </div>
+            
+            <!-- CTA Integrado en el bloque lavanda -->
+            <div class="integrated-cta">
+              <button onclick="addToCartAjax()" class="reserve-btn-integrated">
+                🛒 RESERVAR AHORA POR <?php echo $tier_info ? $tier_info['price'] : 69; ?>€
+                <span class="btn-subtitle-integrated">Antes 149€ - Ahorra <?php echo $tier_info ? $tier_info['savings'] : 80; ?>€</span>
+              </button>
+            </div>
           </div>
-        </div>
-      </div>
-
-      <!-- Botón de Reserva Directo -->
-      <div class="reserve-action">
-        <button onclick="addToCartAjax()" class="btn-primary btn-large btn-full reserve-btn">
-          🛒 Reservar Ahora por <?php echo $tier_info ? $tier_info['price'] : 69; ?>€
-          <span class="btn-subtitle">Depósito 29€ - Resto al envío</span>
-        </button>
-        
-        <div class="guarantee-badges">
-          <span class="guarantee-item">🔒 Pago 100% seguro</span>
-          <span class="guarantee-item">🚚 Envío GRATIS</span>
-          <span class="guarantee-item">↩️ 30 días garantía</span>
-          <span class="guarantee-item">✅ Certificado FDA</span>
         </div>
       </div>
     </div>

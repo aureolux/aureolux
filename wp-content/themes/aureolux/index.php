@@ -9,28 +9,51 @@ get_header(); ?>
 <!-- Hero Section -->
 <section class="hero-section">
   <div class="container">
-    <div class="hero-grid">
-      <div class="hero-content">
+    <div class="hero-v2-grid">
+      <div class="hero-v2-content">
         <?php 
         // Obtener información dinámica de precios
         $tier_info = function_exists('aureolux_get_tier_info') ? aureolux_get_tier_info() : array('tier' => 1, 'price' => 69, 'remaining' => 50, 'savings' => 80, 'message' => 'Solo quedan 50 unidades a este precio');
         $discount_percent = $tier_info ? round(($tier_info['savings'] / 149) * 100) : 40;
         ?>
-        <div class="badge">⚡ Oferta Pre-lanzamiento - <?php echo $discount_percent; ?>% DTO</div>
-        <h1 class="hero-title">Borra 10 años en 10 minutos al día</h1>
-        <p class="hero-subtitle">
-          La única máscara LED que cuida tu rostro Y cuello con tecnología clínica certificada FDA, 
-          al precio justo. Ya la usan 50.000 mujeres en Europa.
-        </p>
-        <div class="hero-cta-group">
-          <button class="btn-primary btn-large" onclick="scrollToPreorder()">
-            Reserva con <?php echo $discount_percent; ?>% DTO
-            <span class="btn-subtitle"><?php echo $tier_info ? $tier_info['message'] : 'Solo quedan 47 unidades'; ?></span>
+        <div class="eyebrow">Nueva generación en fototerapia</div>
+        <h1 class="hero-title v2">Rejuvenece rostro y cuello en 10 minutos al día</h1>
+        <ul class="hero-bullets">
+          <li>219 LEDs médicos · Roja, Azul y NIR</li>
+          <li>Resultados visibles en 3-4 semanas</li>
+          <li>Silicona flexible y ligera · Sin dolor</li>
+        </ul>
+        <div class="hero-v2-rating">
+          <div class="stars">★★★★★</div>
+          <span>4.9/5 basado en 1.253 reseñas</span>
+        </div>
+        <div class="hero-v2-ctas">
+          <button class="btn-primary btn-large cta-reserve" data-cta="reserve" onclick="addToCartAjax()">
+            Reservar ahora por <?php echo $tier_info ? $tier_info['price'] : 69; ?>€
+            <span class="btn-subtitle">Depósito hoy 29€ · Ahorra <?php echo $tier_info ? $tier_info['savings'] : 80; ?>€</span>
           </button>
-          <div class="trust-badges">
-            <span>✅ FDA</span>
-            <span>✅ CE</span>
-            <span>✅ Garantía 30 días</span>
+          <button class="btn-secondary" onclick="scrollToPreorder()">Ver precio por tramos</button>
+        </div>
+        <div class="hero-v2-badges">
+          <span>FDA</span>
+          <span>CE</span>
+          <span>30 días garantía</span>
+        </div>
+      </div>
+      <div class="hero-v2-visual">
+        <div class="product-showcase v2">
+          <div class="product-image-placeholder v2">
+            <div class="led-mask-visual">
+              <div class="mask-glow"></div>
+              <div class="mask-body">
+                <div class="led-dots"></div>
+              </div>
+            </div>
+          </div>
+          <div class="price-pill-v2">
+            <span class="original-price">149€</span>
+            <span class="sale-price"><?php echo $tier_info ? $tier_info['price'] : 69; ?>€</span>
+            <span class="price-caption">Solo 29€ hoy</span>
           </div>
         </div>
         <div class="social-proof">
@@ -40,26 +63,22 @@ get_header(); ?>
             <img src="https://i.pravatar.cc/40?img=3" alt="Cliente">
             <img src="https://i.pravatar.cc/40?img=4" alt="Cliente">
           </div>
-          <p>+5,234 mujeres ya reservaron la suya</p>
-        </div>
-      </div>
-      <div class="hero-image">
-        <div class="product-showcase">
-          <div class="product-image-placeholder">
-            <div class="led-mask-visual">
-              <div class="mask-glow"></div>
-              <div class="mask-body">
-                <div class="led-dots"></div>
-              </div>
-            </div>
-          </div>
-          <div class="price-tag">
-            <span class="original-price">149€</span>
-            <span class="sale-price"><?php echo $tier_info ? $tier_info['price'] : 69; ?>€</span>
-          </div>
+          <p>+5.234 mujeres ya reservaron la suya</p>
         </div>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- Value Bar -->
+<section class="value-bar">
+  <div class="container">
+    <ul class="value-icons">
+      <li>🚚 Envío 24/48h</li>
+      <li>🛡️ Garantía 30 días</li>
+      <li>🔒 Pago 100% seguro</li>
+      <li>🤝 Atención 7/7</li>
+    </ul>
   </div>
 </section>
 

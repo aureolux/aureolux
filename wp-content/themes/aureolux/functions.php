@@ -76,9 +76,16 @@ add_action('widgets_init', 'custom_theme_widgets_init');
  * Enqueue scripts and styles
  */
 function custom_theme_scripts() {
-    wp_enqueue_style('custom-theme-style', get_stylesheet_uri(), array(), '1.0.0');
+    // Cargar el CSS principal del tema
+    wp_enqueue_style('aureolux-style', get_stylesheet_uri(), array(), '1.0.0');
 
-    wp_enqueue_script('custom-theme-navigation', get_template_directory_uri() . '/js/navigation.js', array(), '1.0.0', true);
+    // Cargar el JavaScript principal de AUREOLUX
+    wp_enqueue_script('aureolux-main', get_template_directory_uri() . '/js/aureolux-main.js', array(), '1.0.0', true);
+
+    // Cargar script de navegación si existe
+    if (file_exists(get_template_directory() . '/js/navigation.js')) {
+        wp_enqueue_script('custom-theme-navigation', get_template_directory_uri() . '/js/navigation.js', array(), '1.0.0', true);
+    }
 
     if (is_singular() && comments_open() && get_option('thread_comments')) {
         wp_enqueue_script('comment-reply');

@@ -10,7 +10,41 @@ window.scrollToPreorder = () => {
 
 window.handlePreorder = (e) => {
   e.preventDefault();
-  alert('¡Gracias por tu reserva! Te contactaremos pronto.');
+  
+  // Mostrar loading
+  const button = e.target.querySelector('button[type="submit"]') || e.target;
+  const originalText = button.innerHTML;
+  button.innerHTML = 'Procesando...';
+  button.disabled = true;
+  
+  // AJAX para agregar al carrito
+  fetch(aureolux_ajax.ajax_url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    body: new URLSearchParams({
+      action: 'aureolux_add_to_cart',
+      nonce: aureolux_ajax.nonce
+    })
+  })
+  .then(response => response.json())
+  .then(data => {
+    if (data.success) {
+      // Redirigir al checkout manteniendo el diseño
+      window.location.href = data.data.checkout_url;
+    } else {
+      alert('Error: ' + data.data);
+      button.innerHTML = originalText;
+      button.disabled = false;
+    }
+  })
+  .catch(error => {
+    console.error('Error:', error);
+    alert('Error al procesar la reserva. Inténtalo de nuevo.');
+    button.innerHTML = originalText;
+    button.disabled = false;
+  });
 };
 
 window.closePopup = () => {
@@ -58,10 +92,90 @@ const initializePopup = () => {
   }, 30000); // 30 segundos
 };
 
+// Actualizar información de precios dinámicamente
+const updatePriceInfo = () => {
+  fetch(aureolux_ajax.ajax_url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    body: new URLSearchParams({
+      action: 'aureolux_get_tier_info',
+      nonce: aureolux_ajax.nonce
+    })
+  })
+  .then(response => response.json())
+  .then(data => {
+    if (data.success && data.data.tier > 0) {
+      const tierInfo = data.data;
+      
+      // Actualizar precio en hero section
+      const salePriceEl = document.querySelector('.sale-price');
+      if (salePriceEl) {
+        salePriceEl.textContent = tierInfo.price + '€';
+      }
+      
+      // Actualizar mensaje de stock
+      const stockMessage = document.querySelector('.btn-subtitle');
+      if (stockMessage) {
+        stockMessage.textContent = tierInfo.message;
+      }
+      
+      // Actualizar badge de oferta
+      const badge = document.querySelector('.badge');
+      if (badge) {
+        const discount = Math.round((tierInfo.savings / 149) * 100);
+        badge.textContent = `⚡ Oferta Pre-lanzamiento - ${discount}% DTO`;
+      }
+      
+      // Actualizar botón de reserva
+      const reserveButtons = document.querySelectorAll('.btn-primary');
+      reserveButtons.forEach(btn => {
+        if (btn.textContent.includes('Reserva')) {
+          const subtitle = btn.querySelector('.btn-subtitle');
+          if (subtitle) {
+            subtitle.textContent = `Antes 149€ - Ahorra ${tierInfo.savings}€`;
+          }
+        }
+      });
+      
+      // Actualizar formulario de preorder
+      const preorderButton = document.querySelector('.preorder-form button');
+      if (preorderButton) {
+        preorderButton.innerHTML = `
+          Reservar Ahora por ${tierInfo.price}€
+          <span class="btn-subtitle">Depósito 29€ - Ahorra ${tierInfo.savings}€</span>
+        `;
+      }
+    } else if (data.success && data.data.tier === 0) {
+      // Preventa cerrada
+      const preorderSection = document.getElementById('preorder');
+      if (preorderSection) {
+        preorderSection.innerHTML = `
+          <div class="container">
+            <div class="preorder-box">
+              <h2>Preventa Cerrada</h2>
+              <p class="preorder-subtitle">¡Gracias por el interés! La preventa ha finalizado.</p>
+              <p>Suscríbete para recibir información sobre el lanzamiento oficial.</p>
+            </div>
+          </div>
+        `;
+      }
+    }
+  })
+  .catch(error => {
+    console.error('Error al actualizar precios:', error);
+  });
+};
+
 // Inicializar funcionalidades cuando el DOM esté listo
 const initializeAureolux = () => {
   initializeCountdown();
   initializePopup();
+  updatePriceInfo();
+  
+  // Actualizar precios cada 30 segundos
+  setInterval(updatePriceInfo, 30000);
 };
 
 // Ejecutar cuando el DOM esté listo

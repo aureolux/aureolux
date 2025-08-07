@@ -11,7 +11,12 @@ get_header(); ?>
   <div class="container">
     <div class="hero-grid">
       <div class="hero-content">
-        <div class="badge">⚡ Oferta Pre-lanzamiento - 40% DTO</div>
+        <?php 
+        // Obtener información dinámica de precios
+        $tier_info = function_exists('aureolux_get_tier_info') ? aureolux_get_tier_info() : array('tier' => 1, 'price' => 69, 'remaining' => 50, 'savings' => 80, 'message' => 'Solo quedan 50 unidades a este precio');
+        $discount_percent = $tier_info ? round(($tier_info['savings'] / 149) * 100) : 40;
+        ?>
+        <div class="badge">⚡ Oferta Pre-lanzamiento - <?php echo $discount_percent; ?>% DTO</div>
         <h1 class="hero-title">Borra 10 años en 10 minutos al día</h1>
         <p class="hero-subtitle">
           La única máscara LED que cuida tu rostro Y cuello con tecnología clínica certificada FDA, 
@@ -19,8 +24,8 @@ get_header(); ?>
         </p>
         <div class="hero-cta-group">
           <button class="btn-primary btn-large" onclick="scrollToPreorder()">
-            Reserva con 40% DTO
-            <span class="btn-subtitle">Solo quedan 47 unidades</span>
+            Reserva con <?php echo $discount_percent; ?>% DTO
+            <span class="btn-subtitle"><?php echo $tier_info ? $tier_info['message'] : 'Solo quedan 47 unidades'; ?></span>
           </button>
           <div class="trust-badges">
             <span>✅ FDA</span>
@@ -49,8 +54,8 @@ get_header(); ?>
             </div>
           </div>
           <div class="price-tag">
-            <span class="original-price">249€</span>
-            <span class="sale-price">149€</span>
+            <span class="original-price">149€</span>
+            <span class="sale-price"><?php echo $tier_info ? $tier_info['price'] : 69; ?>€</span>
           </div>
         </div>
       </div>
@@ -256,7 +261,7 @@ get_header(); ?>
   <div class="container">
     <div class="preorder-box">
       <h2>Reserva tu máscara AUREOLUX</h2>
-      <p class="preorder-subtitle">Oferta especial pre-lanzamiento - Ahorra 100€</p>
+      <p class="preorder-subtitle">Oferta especial pre-lanzamiento - Ahorra <?php echo $tier_info ? $tier_info['savings'] : 80; ?>€</p>
       
       <div class="countdown-timer">
         <div class="timer-block">
@@ -284,8 +289,8 @@ get_header(); ?>
           <input type="tel" placeholder="Teléfono" required>
         </div>
         <button type="submit" class="btn-primary btn-large btn-full">
-          Reservar Ahora por 149€
-          <span class="btn-subtitle">Antes 249€ - Envío GRATIS</span>
+          Reservar Ahora por <?php echo $tier_info ? $tier_info['price'] : 69; ?>€
+          <span class="btn-subtitle">Depósito 29€ - Ahorra <?php echo $tier_info ? $tier_info['savings'] : 80; ?>€</span>
         </button>
         <p class="form-note">
           <span>🔒 Pago 100% seguro</span>

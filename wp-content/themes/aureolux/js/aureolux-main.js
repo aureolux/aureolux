@@ -92,6 +92,47 @@ const initializePopup = () => {
   }, 30000); // 30 segundos
 };
 
+// Función para agregar al carrito via AJAX
+const addToCartAjax = () => {
+  const button = document.querySelector('.reserve-btn');
+  if (button) {
+    button.disabled = true;
+    button.innerHTML = '⏳ Agregando...';
+  }
+
+  fetch(aureolux_ajax.ajax_url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    body: new URLSearchParams({
+      action: 'aureolux_add_to_cart',
+      nonce: aureolux_ajax.nonce
+    })
+  })
+  .then(response => response.json())
+  .then(data => {
+    if (data.success) {
+      // Redirigir al checkout
+      window.location.href = data.data.checkout_url;
+    } else {
+      alert('Error: ' + (data.data || 'No se pudo agregar al carrito'));
+      if (button) {
+        button.disabled = false;
+        button.innerHTML = '🛒 Reservar Ahora por ' + (data.data.price || '69') + '€<span class="btn-subtitle">Depósito 29€ - Resto al envío</span>';
+      }
+    }
+  })
+  .catch(error => {
+    console.error('Error:', error);
+    alert('Error de conexión. Por favor, inténtalo de nuevo.');
+    if (button) {
+      button.disabled = false;
+      button.innerHTML = '🛒 Reservar Ahora<span class="btn-subtitle">Depósito 29€ - Resto al envío</span>';
+    }
+  });
+};
+
 // Actualizar información de precios dinámicamente
 const updatePriceInfo = () => {
   fetch(aureolux_ajax.ajax_url, {

@@ -73,9 +73,62 @@ function custom_theme_widgets_init() {
 add_action('widgets_init', 'custom_theme_widgets_init');
 
 /**
+ * Forzar plantillas clásicas de WooCommerce en lugar de bloques
+ */
+function aureolux_disable_woocommerce_blocks() {
+    // Deshabilitar los bloques de WooCommerce para usar plantillas clásicas
+    add_filter( 'woocommerce_cart_shortcode_content', 'aureolux_custom_cart_shortcode' );
+    add_filter( 'woocommerce_checkout_shortcode_content', 'aureolux_custom_checkout_shortcode' );
+    
+    // Remover el soporte para bloques de WooCommerce
+    remove_theme_support( 'wc-product-gallery-zoom' );
+    remove_theme_support( 'wc-product-gallery-lightbox' );
+    remove_theme_support( 'wc-product-gallery-slider' );
+}
+add_action( 'after_setup_theme', 'aureolux_disable_woocommerce_blocks' );
+
+// Forzar el uso de la plantilla clásica del carrito
+function aureolux_custom_cart_shortcode( $content ) {
+    if ( is_cart() ) {
+        ob_start();
+        wc_get_template( 'cart/cart.php' );
+        return ob_get_clean();
+    }
+    return $content;
+}
+
+// Forzar el uso de la plantilla clásica del checkout
+function aureolux_custom_checkout_shortcode( $content ) {
+    if ( is_checkout() ) {
+        ob_start();
+        wc_get_template( 'checkout/form-checkout.php' );
+        return ob_get_clean();
+    }
+    return $content;
+}
+
+// Deshabilitar completamente los bloques de WooCommerce
+function aureolux_deregister_woocommerce_blocks() {
+    if ( function_exists( 'wc_get_page_id' ) ) {
+        // Forzar shortcodes clásicos en páginas de WooCommerce
+        $cart_page_id = wc_get_page_id( 'cart' );
+        $checkout_page_id = wc_get_page_id( 'checkout' );
+        
+        if ( $cart_page_id && get_post_meta( $cart_page_id, '_wp_page_template', true ) !== 'page-cart.php' ) {
+            update_post_meta( $cart_page_id, '_wp_page_template', 'default' );
+        }
+        
+        if ( $checkout_page_id && get_post_meta( $checkout_page_id, '_wp_page_template', true ) !== 'page-checkout.php' ) {
+            update_post_meta( $checkout_page_id, '_wp_page_template', 'default' );
+        }
+    }
+}
+add_action( 'init', 'aureolux_deregister_woocommerce_blocks' );
+
+/**
  * Enqueue scripts and styles
  */
-function custom_theme_scripts() {
+function aureolux_enqueue_scripts() {
     // Cargar el CSS principal del tema
     wp_enqueue_style('aureolux-style', get_stylesheet_uri(), array(), '1.0.0');
 

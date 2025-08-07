@@ -1862,7 +1862,9 @@ p {
 }
 
 .cart-items {
-  /* Items spaced with margin-bottom in .cart-item */
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .cart-item {
@@ -1974,7 +1976,9 @@ p {
 }
 
 .cart-totals-inner {
-  /* Items spaced with padding in child elements */
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 
 .cart-totals-inner > * {
@@ -2067,6 +2071,490 @@ p {
   
   .cart-header h2 {
     font-size: 2rem;
+  }
+}
+
+/* === CHECKOUT AUREOLUX STYLES === */
+.aureolux-checkout-section {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+  padding: 40px 0;
+}
+
+.checkout-wrapper {
+  max-width: 1400px;
+  margin: 0 auto;
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+  overflow: hidden;
+}
+
+.checkout-header {
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  color: white;
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.checkout-header h2 {
+  font-size: 2.5rem;
+  margin: 0 0 10px 0;
+  font-weight: 700;
+}
+
+.checkout-subtitle {
+  font-size: 1.1rem;
+  opacity: 0.9;
+  margin: 0 0 30px 0;
+}
+
+.checkout-progress {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 30px;
+}
+
+.progress-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.step-number {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1.1rem;
+  background: rgba(255,255,255,0.2);
+  color: rgba(255,255,255,0.7);
+  transition: all 0.3s ease;
+}
+
+.progress-step.completed .step-number {
+  background: #00b894;
+  color: white;
+}
+
+.progress-step.active .step-number {
+  background: #ffeaa7;
+  color: #1a1a2e;
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+.step-label {
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+.progress-step.active .step-label {
+  opacity: 1;
+  font-weight: 600;
+}
+
+.progress-line {
+  width: 60px;
+  height: 2px;
+  background: rgba(255,255,255,0.3);
+  margin: 0 10px;
+}
+
+.checkout-content {
+  display: grid;
+  grid-template-columns: 1fr 400px;
+  gap: 40px;
+  padding: 40px;
+}
+
+.checkout-form-section {
+  background: #f8f9ff;
+  padding: 30px;
+  border-radius: 15px;
+  border: 2px solid #e1e5f7;
+}
+
+.customer-details-section h3 {
+  font-size: 1.4rem;
+  color: #1a1a2e;
+  margin: 0 0 20px 0;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #667eea;
+}
+
+.checkout-summary-section {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.order-summary {
+  background: #f8f9ff;
+  padding: 30px;
+  border-radius: 15px;
+  border: 2px solid #e1e5f7;
+  position: sticky;
+  top: 20px;
+}
+
+.order-summary h3 {
+  font-size: 1.6rem;
+  color: #1a1a2e;
+  margin: 0 0 25px 0;
+  text-align: center;
+}
+
+.product-preview {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 20px;
+  background: white;
+  border-radius: 12px;
+  margin-bottom: 25px;
+  border: 2px solid #e1e5f7;
+}
+
+.led-mask-checkout {
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(45deg, #667eea, #764ba2);
+  border-radius: 50%;
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.mask-glow-checkout {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 70%;
+  height: 70%;
+  background: radial-gradient(circle, rgba(255,255,255,0.4) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: glow-pulse 2s ease-in-out infinite alternate;
+}
+
+.product-info h4 {
+  font-size: 1.2rem;
+  color: #1a1a2e;
+  margin: 0 0 5px 0;
+  font-weight: 600;
+}
+
+.product-info p {
+  color: #666;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.order-review-section h4 {
+  font-size: 1.2rem;
+  color: #1a1a2e;
+  margin: 0 0 15px 0;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #e1e5f7;
+}
+
+.checkout-guarantees {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  margin-top: 25px;
+  padding-top: 25px;
+  border-top: 2px solid #e1e5f7;
+}
+
+.guarantee-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px;
+  background: white;
+  border-radius: 8px;
+  border: 1px solid #e1e5f7;
+  font-size: 0.9rem;
+  color: #1a1a2e;
+}
+
+.guarantee-icon {
+  font-size: 1.2rem;
+}
+
+/* Estilos para campos de formulario */
+.woocommerce-checkout .form-row input[type="text"],
+.woocommerce-checkout .form-row input[type="email"],
+.woocommerce-checkout .form-row input[type="tel"],
+.woocommerce-checkout .form-row select,
+.woocommerce-checkout .form-row textarea {
+  width: 100%;
+  padding: 12px 15px;
+  border: 2px solid #e1e5f7;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  background: white;
+}
+
+.woocommerce-checkout .form-row input:focus,
+.woocommerce-checkout .form-row select:focus,
+.woocommerce-checkout .form-row textarea:focus {
+  border-color: #667eea;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.woocommerce-checkout .form-row label {
+  font-weight: 600;
+  color: #1a1a2e;
+  margin-bottom: 8px;
+  display: block;
+}
+
+/* Botón de pago */
+#place_order {
+  width: 100%;
+  padding: 18px;
+  background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%);
+  color: #1a1a2e;
+  border: none;
+  border-radius: 12px;
+  font-size: 1.2rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 20px;
+}
+
+#place_order:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(253, 203, 110, 0.4);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .checkout-content {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+  
+  .order-summary {
+    position: static;
+  }
+}
+
+@media (max-width: 768px) {
+  .checkout-progress {
+    gap: 10px;
+  }
+  
+  .progress-line {
+    width: 30px;
+  }
+  
+  .step-number {
+    width: 35px;
+    height: 35px;
+    font-size: 1rem;
+  }
+  
+  .checkout-header h2 {
+    font-size: 2rem;
+  }
+  
+  .checkout-content {
+    padding: 20px;
+  }
+  
+  .guarantee-item {
+    font-size: 0.8rem;
+  }
+  
+  .checkout-guarantees {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+}
+
+/* === WOOCOMMERCE BLOCKS CUSTOMIZATION === */
+/* Personalización para los bloques WooCommerce modernos */
+
+/* Carrito - Bloque principal */
+.wp-block-woocommerce-cart {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+  padding: 40px 0;
+}
+
+.wp-block-woocommerce-filled-cart-block {
+  max-width: 1200px;
+  margin: 0 auto;
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+  overflow: hidden;
+  padding: 40px;
+}
+
+/* Header personalizado para el carrito */
+.wp-block-woocommerce-cart::before {
+  content: "🛒 Tu Reserva AUREOLUX";
+  display: block;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  color: white;
+  text-align: center;
+  padding: 40px 20px;
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin: -40px -40px 40px -40px;
+  border-radius: 20px 20px 0 0;
+}
+
+/* Items del carrito */
+.wp-block-woocommerce-cart-line-items-block {
+  background: #f8f9ff;
+  border-radius: 15px;
+  padding: 30px;
+  margin-bottom: 30px;
+  border: 2px solid #e1e5f7;
+}
+
+/* Totales del carrito */
+.wp-block-woocommerce-cart-totals-block {
+  background: #f8f9ff;
+  border-radius: 15px;
+  padding: 30px;
+  border: 2px solid #e1e5f7;
+}
+
+.wp-block-woocommerce-cart-order-summary-heading-block {
+  font-size: 1.6rem;
+  color: #1a1a2e;
+  text-align: center;
+  margin-bottom: 25px;
+  font-weight: 700;
+}
+
+/* Botón proceder al checkout */
+.wp-block-woocommerce-proceed-to-checkout-block a,
+.wp-block-woocommerce-proceed-to-checkout-block button {
+  width: 100% !important;
+  padding: 20px !important;
+  background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%) !important;
+  color: #1a1a2e !important;
+  border: none !important;
+  border-radius: 12px !important;
+  font-size: 1.2rem !important;
+  font-weight: 700 !important;
+  text-decoration: none !important;
+  text-align: center !important;
+  transition: all 0.3s ease !important;
+  margin-top: 25px !important;
+  display: block !important;
+}
+
+.wp-block-woocommerce-proceed-to-checkout-block a:hover,
+.wp-block-woocommerce-proceed-to-checkout-block button:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 10px 25px rgba(253, 203, 110, 0.4) !important;
+  color: #1a1a2e !important;
+}
+
+/* Checkout - Bloques principales */
+.wp-block-woocommerce-checkout {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+  padding: 40px 0;
+}
+
+.wp-block-woocommerce-checkout-fields-block,
+.wp-block-woocommerce-checkout-totals-block {
+  background: white;
+  border-radius: 20px;
+  padding: 40px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+  margin: 20px;
+}
+
+/* Header del checkout */
+.wp-block-woocommerce-checkout::before {
+  content: "🚀 Finalizar Reserva AUREOLUX";
+  display: block;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  color: white;
+  text-align: center;
+  padding: 40px 20px;
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin: -40px 0 40px 0;
+}
+
+/* Campos de formulario en bloques */
+.wp-block-woocommerce-checkout input[type="text"],
+.wp-block-woocommerce-checkout input[type="email"],
+.wp-block-woocommerce-checkout input[type="tel"],
+.wp-block-woocommerce-checkout select,
+.wp-block-woocommerce-checkout textarea {
+  width: 100%;
+  padding: 12px 15px;
+  border: 2px solid #e1e5f7;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  background: white;
+}
+
+.wp-block-woocommerce-checkout input:focus,
+.wp-block-woocommerce-checkout select:focus,
+.wp-block-woocommerce-checkout textarea:focus {
+  border-color: #667eea;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+/* Botón de pago en bloques */
+.wp-block-woocommerce-checkout-actions-block button,
+.wp-block-woocommerce-checkout-place-order-block button {
+  width: 100% !important;
+  padding: 18px !important;
+  background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%) !important;
+  color: #1a1a2e !important;
+  border: none !important;
+  border-radius: 12px !important;
+  font-size: 1.2rem !important;
+  font-weight: 700 !important;
+  cursor: pointer !important;
+  transition: all 0.3s ease !important;
+  margin-top: 20px !important;
+}
+
+.wp-block-woocommerce-checkout-actions-block button:hover,
+.wp-block-woocommerce-checkout-place-order-block button:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 10px 25px rgba(253, 203, 110, 0.4) !important;
+}
+
+/* Responsive para bloques */
+@media (max-width: 768px) {
+  .wp-block-woocommerce-cart::before,
+  .wp-block-woocommerce-checkout::before {
+    font-size: 2rem;
+    padding: 30px 15px;
+  }
+  
+  .wp-block-woocommerce-filled-cart-block,
+  .wp-block-woocommerce-checkout-fields-block,
+  .wp-block-woocommerce-checkout-totals-block {
+    margin: 10px;
+    padding: 20px;
   }
 }
 

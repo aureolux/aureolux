@@ -1,18 +1,9 @@
 <?php
 /**
- * Checkout Form
+ * Checkout Form - AUREOLUX Custom Template
  *
- * This template can be overridden by copying it to yourtheme/woocommerce/checkout/form-checkout.php.
- *
- * HOWEVER, on occasion WooCommerce will need to update template files and you
- * (the theme developer) will need to copy the new files to your theme to
- * maintain compatibility. We try to do this as little as possible, but it does
- * happen. When this occurs the version of the template file will be bumped and
- * the readme will list any important changes.
- *
- * @see https://woocommerce.com/document/template-structure/
- * @package WooCommerce\Templates
- * @version 9.4.0
+ * @package AUREOLUX
+ * @version 1.0.0
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -29,38 +20,124 @@ if ( ! $checkout->is_registration_enabled() && $checkout->is_registration_requir
 
 ?>
 
-<form name="checkout" method="post" class="checkout woocommerce-checkout" action="<?php echo esc_url( wc_get_checkout_url() ); ?>" enctype="multipart/form-data" aria-label="<?php echo esc_attr__( 'Checkout', 'woocommerce' ); ?>">
+<!-- Checkout Section con diseño AUREOLUX -->
+<section class="aureolux-checkout-section">
+  <div class="container">
+    <div class="checkout-wrapper">
+      
+      <!-- Header del Checkout -->
+      <div class="checkout-header">
+        <h2>🚀 Finalizar Reserva AUREOLUX</h2>
+        <p class="checkout-subtitle">Completa tu información para asegurar tu máscara LED</p>
+        
+        <!-- Progreso visual -->
+        <div class="checkout-progress">
+          <div class="progress-step completed">
+            <span class="step-number">1</span>
+            <span class="step-label">Producto</span>
+          </div>
+          <div class="progress-line"></div>
+          <div class="progress-step active">
+            <span class="step-number">2</span>
+            <span class="step-label">Pago</span>
+          </div>
+          <div class="progress-line"></div>
+          <div class="progress-step">
+            <span class="step-number">3</span>
+            <span class="step-label">Confirmación</span>
+          </div>
+        </div>
+      </div>
 
-	<?php if ( $checkout->get_checkout_fields() ) : ?>
+      <form name="checkout" method="post" class="checkout woocommerce-checkout aureolux-checkout-form" action="<?php echo esc_url( wc_get_checkout_url() ); ?>" enctype="multipart/form-data" aria-label="<?php echo esc_attr__( 'Checkout', 'woocommerce' ); ?>">
 
-		<?php do_action( 'woocommerce_checkout_before_customer_details' ); ?>
+        <div class="checkout-content">
+          
+          <!-- Columna izquierda: Formulario -->
+          <div class="checkout-form-section">
+            
+            <?php if ( $checkout->get_checkout_fields() ) : ?>
+              <?php do_action( 'woocommerce_checkout_before_customer_details' ); ?>
 
-		<div class="col2-set" id="customer_details">
-			<div class="col-1">
-				<?php do_action( 'woocommerce_checkout_billing' ); ?>
-			</div>
+              <div class="customer-details-section">
+                <h3>📋 Información de Facturación</h3>
+                <div class="billing-fields">
+                  <?php do_action( 'woocommerce_checkout_billing' ); ?>
+                </div>
 
-			<div class="col-2">
-				<?php do_action( 'woocommerce_checkout_shipping' ); ?>
-			</div>
-		</div>
+                <?php if ( WC()->cart->needs_shipping() && WC()->cart->show_shipping() ) : ?>
+                  <h3>📦 Información de Envío</h3>
+                  <div class="shipping-fields">
+                    <?php do_action( 'woocommerce_checkout_shipping' ); ?>
+                  </div>
+                <?php endif; ?>
+              </div>
 
-		<?php do_action( 'woocommerce_checkout_after_customer_details' ); ?>
+              <?php do_action( 'woocommerce_checkout_after_customer_details' ); ?>
+            <?php endif; ?>
 
-	<?php endif; ?>
-	
-	<?php do_action( 'woocommerce_checkout_before_order_review_heading' ); ?>
-	
-	<h3 id="order_review_heading"><?php esc_html_e( 'Your order', 'woocommerce' ); ?></h3>
-	
-	<?php do_action( 'woocommerce_checkout_before_order_review' ); ?>
+          </div>
 
-	<div id="order_review" class="woocommerce-checkout-review-order">
-		<?php do_action( 'woocommerce_checkout_order_review' ); ?>
-	</div>
+          <!-- Columna derecha: Resumen del pedido -->
+          <div class="checkout-summary-section">
+            
+            <!-- Resumen del producto -->
+            <div class="order-summary">
+              <h3>💎 Tu Reserva</h3>
+              
+              <div class="product-preview">
+                <div class="led-mask-checkout">
+                  <div class="mask-glow-checkout"></div>
+                </div>
+                <div class="product-info">
+                  <h4>Máscara LED Facial AUREOLUX</h4>
+                  <p>Tecnología FDA • 7 Colores LED</p>
+                </div>
+              </div>
 
-	<?php do_action( 'woocommerce_checkout_after_order_review' ); ?>
+              <!-- Detalles del pedido -->
+              <?php do_action( 'woocommerce_checkout_before_order_review_heading' ); ?>
+              
+              <div class="order-review-section">
+                <h4>📊 Desglose del Pedido</h4>
+                
+                <?php do_action( 'woocommerce_checkout_before_order_review' ); ?>
+                <div id="order_review" class="woocommerce-checkout-review-order">
+                  <?php do_action( 'woocommerce_checkout_order_review' ); ?>
+                </div>
+                <?php do_action( 'woocommerce_checkout_after_order_review' ); ?>
+              </div>
 
-</form>
+              <!-- Garantías y certificaciones -->
+              <div class="checkout-guarantees">
+                <div class="guarantee-item">
+                  <span class="guarantee-icon">🔒</span>
+                  <span>Pago 100% Seguro</span>
+                </div>
+                <div class="guarantee-item">
+                  <span class="guarantee-icon">🚚</span>
+                  <span>Envío Gratis</span>
+                </div>
+                <div class="guarantee-item">
+                  <span class="guarantee-icon">↩️</span>
+                  <span>30 días devolución</span>
+                </div>
+                <div class="guarantee-item">
+                  <span class="guarantee-icon">🏆</span>
+                  <span>Garantía 2 años</span>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </form>
+
+    </div>
+  </div>
+</section>
 
 <?php do_action( 'woocommerce_after_checkout_form', $checkout ); ?>
